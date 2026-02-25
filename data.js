@@ -408,10 +408,109 @@ const QGen = {
         return QGen[key] || QGen.s1l1;
     },
 
-    // Classic/endless/survival - mixed
+    // Classic/endless/survival - mixed (legacy fallback)
     mixed(difficulty = 'medium') {
         const gens = [QGen.s1l1, QGen.s1l2, QGen.s1l3, QGen.s1l4, QGen.s4l1, QGen.s5l1, QGen.s5l2];
         const gen = gens[QGen.rand(0, gens.length - 1)];
         return gen();
+    },
+
+    // ---- CONFIGURABLE GENERATOR FOR TRAIN MODES ----
+    // config = { digits: [1,2,3,4], ops: ['+','-','×','÷'], concepts: ['s1','s2',...] }
+    _digitRange(digits) {
+        // returns [min, max] for a given digit-count array
+        const ranges = { 1: [1, 9], 2: [10, 99], 3: [100, 999], 4: [1000, 9999] };
+        let min = 9999, max = 1;
+        (digits || [2]).forEach(d => {
+            const r = ranges[d] || ranges[2];
+            if (r[0] < min) min = r[0];
+            if (r[1] > max) max = r[1];
+        });
+        return [min, max];
+    },
+
+    configuredQ(config) {
+        const ops = config.ops || ['+', '-', '×', '÷'];
+        const concepts = config.concepts || ['s1', 's2', 's3', 's4', 's5', 's6', 's7'];
+        const digits = config.digits || [2];
+
+        // Build a pool of eligible generators
+        const pool = [];
+
+        // Map concepts → generators
+        const conceptMap = {
+            s1: { // Fundamental Operations (filter by ops)
+                '+': 'add', '-': 'sub', '×': 'mul', '÷': 'div'
+            },
+            s2: ['s2l1', 's2l2', 's2l3', 's2l4', 's2l5', 's2l6', 's2l7'],
+            s3: ['s3l1', 's3l2', 's3l3', 's3l4'],
+            s4: ['s4l1', 's4l2', 's4l3', 's4l4'],
+            s5: ['s5l1', 's5l2', 's5l3'],
+            s6: ['s6l1', 's6l2', 's6l3', 's6l4'],
+            s7: ['s7l1', 's7l2', 's7l3', 's7l4']
+        };
+
+        concepts.forEach(cid => {
+            if (cid === 's1') {
+                // For fundamentals, respect the ops filter
+                ops.forEach(op => {
+                    pool.push({ type: 'arithmetic', op, digits });
+                });
+            } else {
+                const lessons = conceptMap[cid];
+                if (lessons) {
+                    lessons.forEach(lid => {
+                        if (QGen[lid]) pool.push({ type: 'lesson', gen: lid });
+                    });
+                }
+            }
+        });
+
+        // If pool is empty, fall back to basic addition
+        if (pool.length === 0) {
+            pool.push({ type: 'arithmetic', op: '+', digits: [2] });
+        }
+
+        // Pick from pool
+        const pick = pool[QGen.rand(0, pool.length - 1)];
+
+        if (pick.type === 'arithmetic') {
+            return QGen._genArithmetic(pick.op, pick.digits);
+        } else {
+            return QGen[pick.gen]();
+        }
+    },
+
+    _genArithmetic(op, digits) {
+        const [min, max] = QGen._digitRange(digits);
+        switch (op) {
+            case '+': {
+                const a = QGen.rand(min, max), b = QGen.rand(min, max);
+                return { q: `${a} + ${b}`, a: a + b };
+            }
+            case '-': {
+                let a = QGen.rand(min, max), b = QGen.rand(min, max);
+                if (b > a) [a, b] = [b, a];
+                return { q: `${a} − ${b}`, a: a - b };
+            }
+            case '×': {
+                // For multiplication, keep one number smaller to be reasonable
+                const bigMax = Math.min(max, 999);
+                const smallMax = Math.min(max, 12);
+                const a = QGen.rand(Math.max(min, 2), bigMax);
+                const b = QGen.rand(2, Math.max(smallMax, 9));
+                return { q: `${a} × ${b}`, a: a * b };
+            }
+            case '÷': {
+                const divisors = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                const d = divisors[QGen.rand(0, divisors.length - 1)];
+                const ans = QGen.rand(Math.max(Math.floor(min / d), 2), Math.floor(max / d) || 20);
+                return { q: `${d * ans} ÷ ${d}`, a: ans };
+            }
+            default: {
+                const a = QGen.rand(min, max), b = QGen.rand(min, max);
+                return { q: `${a} + ${b}`, a: a + b };
+            }
+        }
     }
 };

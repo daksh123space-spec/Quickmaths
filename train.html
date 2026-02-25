@@ -13,6 +13,7 @@
         :root {
             --accent: #7c3aed;
             --bg: #020205;
+            --card: rgba(255, 255, 255, .04);
             --border: rgba(255, 255, 255, .08);
             --text2: rgba(255, 255, 255, .5)
         }
@@ -32,7 +33,7 @@
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
-            overflow: hidden
+            overflow: auto
         }
 
         .bg {
@@ -74,7 +75,12 @@
         }
 
         .page {
-            animation: fadeUp .5s ease
+            animation: fadeUp .5s ease;
+            display: none
+        }
+
+        .page.active {
+            display: block
         }
 
         @keyframes fadeUp {
@@ -89,12 +95,230 @@
             }
         }
 
-        /* --- CLASSIC --- */
+        /* CONFIG SCREEN */
+        .config-card {
+            background: rgba(10, 10, 26, .7);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 2.5rem;
+            max-width: 640px;
+            margin: 0 auto
+        }
+
+        .config-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem
+        }
+
+        .config-header .mode-icon {
+            font-size: 2.5rem
+        }
+
+        .config-header h1 {
+            font-size: 1.6rem;
+            font-weight: 800
+        }
+
+        .config-header .mode-desc {
+            font-size: .85rem;
+            color: var(--text2);
+            margin-top: .25rem
+        }
+
+        .back-link {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: .85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            margin-bottom: 1.5rem;
+            transition: color .2s
+        }
+
+        .back-link:hover {
+            color: #fff
+        }
+
+        .cfg-section {
+            margin-bottom: 2rem
+        }
+
+        .cfg-section h3 {
+            font-size: .78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text2);
+            margin-bottom: .85rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .cfg-section h3 .cfg-ico {
+            font-size: 1rem
+        }
+
+        /* Toggle Pills */
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem
+        }
+
+        .pill {
+            padding: .55rem 1.1rem;
+            border-radius: 100px;
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .25s;
+            border: 1.5px solid var(--border);
+            background: rgba(255, 255, 255, .03);
+            color: rgba(255, 255, 255, .5);
+            user-select: none
+        }
+
+        .pill:hover {
+            border-color: rgba(255, 255, 255, .2);
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .pill.on {
+            background: rgba(124, 58, 237, .2);
+            border-color: rgba(124, 58, 237, .5);
+            color: #c4b5fd
+        }
+
+        /* Operation pills - bigger */
+        .op-pill {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .25s;
+            border: 2px solid var(--border);
+            background: rgba(255, 255, 255, .03);
+            color: rgba(255, 255, 255, .4);
+            font-weight: 700
+        }
+
+        .op-pill:hover {
+            border-color: rgba(255, 255, 255, .2);
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .op-pill.on {
+            background: rgba(124, 58, 237, .2);
+            border-color: rgba(124, 58, 237, .5);
+            color: #c4b5fd
+        }
+
+        /* Concept pills */
+        .concept-pill {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .6rem 1.1rem;
+            border-radius: 14px;
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .25s;
+            border: 1.5px solid var(--border);
+            background: rgba(255, 255, 255, .03);
+            color: rgba(255, 255, 255, .5)
+        }
+
+        .concept-pill:hover {
+            border-color: rgba(255, 255, 255, .2);
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .concept-pill.on {
+            background: rgba(124, 58, 237, .15);
+            border-color: rgba(124, 58, 237, .4);
+            color: #c4b5fd
+        }
+
+        .concept-pill .c-icon {
+            font-size: 1rem
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem
+        }
+
+        /* Quick presets */
+        .presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-bottom: 2rem
+        }
+
+        .preset-btn {
+            padding: .45rem .9rem;
+            border-radius: 100px;
+            font-size: .75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .25s;
+            border: 1px solid rgba(245, 158, 11, .2);
+            background: rgba(245, 158, 11, .06);
+            color: #f59e0b
+        }
+
+        .preset-btn:hover {
+            background: rgba(245, 158, 11, .15);
+            border-color: rgba(245, 158, 11, .4)
+        }
+
+        /* Start button */
+        .btn-start {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            border: none;
+            border-radius: 18px;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all .3s;
+            letter-spacing: .5px;
+            margin-top: .5rem
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, .35)
+        }
+
+        .select-hint {
+            text-align: center;
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .25);
+            margin-top: .75rem
+        }
+
+        /* ======= GAME SCREENS ======= */
+        /* Timer circle */
         .timer-circle {
-            width: 140px;
-            height: 140px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            background: conic-gradient(#7c3aed var(--prog, 0%), rgba(255, 255, 255, .06) 0);
+            background: conic-gradient(#7c3aed var(--prog, 360deg), rgba(255, 255, 255, .06) 0);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -113,7 +337,7 @@
         .timer-num {
             position: relative;
             z-index: 1;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
             color: #fff
         }
@@ -129,13 +353,15 @@
         }
 
         .q-card h2 {
-            font-size: 3rem;
+            font-size: 2.6rem;
             font-weight: 800;
             margin-bottom: 1.75rem;
-            letter-spacing: -1px
+            letter-spacing: -1px;
+            word-break: break-word;
+            line-height: 1.2
         }
 
-        #train-input {
+        .game-input {
             width: 100%;
             max-width: 250px;
             padding: 1rem 1.25rem;
@@ -149,15 +375,15 @@
             font-family: 'Inter', sans-serif
         }
 
-        #train-input:focus {
+        .game-input:focus {
             border-color: var(--accent)
         }
 
-        #train-input.correct {
+        .game-input.correct {
             border-color: #10b981
         }
 
-        #train-input.wrong {
+        .game-input.wrong {
             border-color: #ef4444;
             animation: shake .4s
         }
@@ -180,9 +406,10 @@
 
         .stats-bar {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             justify-content: center;
-            margin-bottom: 2rem
+            margin-bottom: 2rem;
+            flex-wrap: wrap
         }
 
         .s-pill {
@@ -197,7 +424,6 @@
             font-weight: 600
         }
 
-        /* MODE header */
         .mode-header {
             display: flex;
             align-items: center;
@@ -230,6 +456,74 @@
             color: #fff
         }
 
+        .hint-text {
+            text-align: center;
+            color: var(--text2);
+            font-size: .82rem;
+            margin-top: -.5rem
+        }
+
+        /* Survival */
+        .survival-arena {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            background: rgba(10, 10, 26, .6);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 1.5rem
+        }
+
+        .falling-q {
+            position: absolute;
+            background: rgba(124, 58, 237, .2);
+            border: 1px solid rgba(124, 58, 237, .4);
+            border-radius: 12px;
+            padding: .6rem 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            white-space: nowrap;
+            animation: fall linear forwards
+        }
+
+        @keyframes fall {
+            from {
+                top: -60px
+            }
+
+            to {
+                top: 100%
+            }
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #7c3aed, #3b82f6);
+            opacity: .3;
+            border-radius: 3px
+        }
+
+        .surv-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, .04);
+            border: 2px solid rgba(255, 255, 255, .1);
+            border-radius: 16px;
+            font-size: 1.4rem;
+            color: #fff;
+            text-align: center;
+            outline: none
+        }
+
+        .surv-input:focus {
+            border-color: #7c3aed
+        }
+
         /* Results */
         .res-card {
             background: rgba(10, 10, 26, .7);
@@ -242,7 +536,7 @@
         }
 
         .res-card h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
             margin-bottom: 2rem
         }
@@ -313,67 +607,6 @@
             text-decoration: none;
             display: inline-block
         }
-
-        /* SURVIVAL */
-        .survival-arena {
-            position: relative;
-            width: 100%;
-            height: 380px;
-            background: rgba(10, 10, 26, .6);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            overflow: hidden;
-            margin-bottom: 1.5rem
-        }
-
-        .falling-q {
-            position: absolute;
-            background: rgba(124, 58, 237, .2);
-            border: 1px solid rgba(124, 58, 237, .4);
-            border-radius: 12px;
-            padding: .6rem 1.2rem;
-            font-size: 1.15rem;
-            font-weight: 700;
-            white-space: nowrap;
-            animation: fall linear forwards
-        }
-
-        @keyframes fall {
-            from {
-                top: -60px
-            }
-
-            to {
-                top: 100%
-            }
-        }
-
-        .ground {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #7c3aed, #3b82f6);
-            opacity: .3;
-            border-radius: 3px
-        }
-
-        .surv-input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            background: rgba(255, 255, 255, .04);
-            border: 2px solid rgba(255, 255, 255, .1);
-            border-radius: 16px;
-            font-size: 1.4rem;
-            color: #fff;
-            text-align: center;
-            outline: none
-        }
-
-        .surv-input:focus {
-            border-color: #7c3aed
-        }
     </style>
 </head>
 
@@ -384,8 +617,73 @@
     </div>
     <div class="wrap">
 
-        <!-- CLASSIC MODE -->
-        <div id="classic-page" class="page" style="display:none">
+        <!-- ============ CONFIG SCREEN ============ -->
+        <div id="config-page" class="page active">
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+            <div class="config-card">
+                <div class="config-header">
+                    <span class="mode-icon" id="cfg-mode-icon">⏱️</span>
+                    <div>
+                        <h1 id="cfg-mode-title">Classic Mode</h1>
+                        <div class="mode-desc" id="cfg-mode-desc">Answer as many as you can in 2 minutes</div>
+                    </div>
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="presets">
+                    <div class="preset-btn" onclick="applyPreset('easy')">🟢 Easy</div>
+                    <div class="preset-btn" onclick="applyPreset('medium')">🟡 Medium</div>
+                    <div class="preset-btn" onclick="applyPreset('hard')">🔴 Hard</div>
+                    <div class="preset-btn" onclick="applyPreset('all')">🌈 Everything</div>
+                </div>
+
+                <!-- DIGITS -->
+                <div class="cfg-section">
+                    <h3><span class="cfg-ico">🔢</span> Number of Digits</h3>
+                    <div class="pill-row" id="digit-pills">
+                        <div class="pill on" data-val="1">1 digit<br><span
+                                style="font-size:.7rem;color:rgba(255,255,255,.3)">1–9</span></div>
+                        <div class="pill on" data-val="2">2 digits<br><span
+                                style="font-size:.7rem;color:rgba(255,255,255,.3)">10–99</span></div>
+                        <div class="pill" data-val="3">3 digits<br><span
+                                style="font-size:.7rem;color:rgba(255,255,255,.3)">100–999</span></div>
+                        <div class="pill" data-val="4">4 digits<br><span
+                                style="font-size:.7rem;color:rgba(255,255,255,.3)">1000–9999</span></div>
+                    </div>
+                </div>
+
+                <!-- OPERATIONS -->
+                <div class="cfg-section">
+                    <h3><span class="cfg-ico">➕</span> Operations</h3>
+                    <div class="pill-row" id="op-pills">
+                        <div class="op-pill on" data-val="+">+</div>
+                        <div class="op-pill on" data-val="-">−</div>
+                        <div class="op-pill on" data-val="×">×</div>
+                        <div class="op-pill on" data-val="÷">÷</div>
+                    </div>
+                </div>
+
+                <!-- CONCEPTS -->
+                <div class="cfg-section">
+                    <h3><span class="cfg-ico">📚</span> Concepts</h3>
+                    <div class="concept-grid" id="concept-pills">
+                        <div class="concept-pill on" data-val="s1"><span class="c-icon">➕</span> Fundamentals</div>
+                        <div class="concept-pill" data-val="s2"><span class="c-icon">½</span> Fractions</div>
+                        <div class="concept-pill" data-val="s3"><span class="c-icon">.</span> Decimals</div>
+                        <div class="concept-pill" data-val="s4"><span class="c-icon">%</span> Percentages</div>
+                        <div class="concept-pill" data-val="s5"><span class="c-icon">²</span> Powers & Roots</div>
+                        <div class="concept-pill" data-val="s6"><span class="c-icon">🧠</span> Advanced Skills</div>
+                        <div class="concept-pill" data-val="s7"><span class="c-icon">🌍</span> Real World</div>
+                    </div>
+                </div>
+
+                <button class="btn-start" onclick="beginGame()">Start Training →</button>
+                <div class="select-hint">Select at least one option from each category</div>
+            </div>
+        </div>
+
+        <!-- ============ CLASSIC MODE ============ -->
+        <div id="classic-page" class="page">
             <div class="mode-header">
                 <div class="mode-badge">⏱️ Classic Mode</div>
                 <button class="exit-btn" onclick="exitTrain()">✕ Exit</button>
@@ -400,13 +698,13 @@
             </div>
             <div class="q-card">
                 <h2 id="c-question">…</h2>
-                <input type="text" id="train-input" placeholder="?" autocomplete="off">
+                <input type="text" class="game-input" id="classic-input" placeholder="?" autocomplete="off">
             </div>
-            <p style="text-align:center;color:var(--text2);font-size:.82rem">Press Enter to submit</p>
+            <p class="hint-text">Press Enter to submit</p>
         </div>
 
-        <!-- ENDLESS MODE -->
-        <div id="endless-page" class="page" style="display:none">
+        <!-- ============ ENDLESS MODE ============ -->
+        <div id="endless-page" class="page">
             <div class="mode-header">
                 <div class="mode-badge">♾️ Endless Mode</div>
                 <button class="exit-btn" onclick="exitTrain()">✕ Exit</button>
@@ -417,12 +715,13 @@
             </div>
             <div class="q-card">
                 <h2 id="e-question">…</h2>
-                <input type="text" id="endless-input" placeholder="?" autocomplete="off">
+                <input type="text" class="game-input" id="endless-input" placeholder="?" autocomplete="off">
             </div>
+            <p class="hint-text">Press Enter to submit &bull; One wrong answer ends the game</p>
         </div>
 
-        <!-- SURVIVAL MODE -->
-        <div id="survival-page" class="page" style="display:none">
+        <!-- ============ SURVIVAL MODE ============ -->
+        <div id="survival-page" class="page">
             <div class="mode-header">
                 <div class="mode-badge">🎯 Survival Mode</div>
                 <div class="s-pill">✓ <span id="surv-score">0</span></div>
@@ -431,17 +730,19 @@
             <div class="survival-arena" id="arena">
                 <div class="ground"></div>
             </div>
-            <input type="text" class="surv-input" id="surv-input" placeholder="Type your answer and press Enter…"
+            <input type="text" class="surv-input" id="surv-input" placeholder="Type answer and press Enter…"
                 autocomplete="off">
         </div>
 
-        <!-- RESULTS -->
-        <div id="results-page" class="page" style="display:none">
+        <!-- ============ RESULTS ============ -->
+        <div id="results-page" class="page">
             <div class="res-card">
                 <h1 id="res-title">Nice Work!</h1>
                 <div class="grid2" id="res-grid"></div>
                 <div class="btn-row">
                     <button class="btn-primary" onclick="restart()">Play Again</button>
+                    <button class="btn-primary" onclick="reconfigure()"
+                        style="background:rgba(255,255,255,.06);border:1px solid var(--border)">Change Settings</button>
                     <a href="dashboard.html" class="btn-sec">Dashboard</a>
                 </div>
             </div>
@@ -452,52 +753,148 @@
     <script src="data.js"></script>
     <script>
         const mode = sessionStorage.getItem('qm_train_mode') || 'classic';
-        let cCorrect = 0, cWrong = 0, cTotal = 0, eTotalTime = 0, eStart = 0, survScore = 0;
-        let currentQ = null;
-        let classicInterval = null, classicSecs = 120;
 
-        function newQ() { return QGen.mixed(); }
+        // ============ CONFIG STATE ============
+        const modeInfo = {
+            classic: { icon: '⏱️', title: 'Classic Mode', desc: 'Answer as many as you can in 2 minutes. Earn XP for each correct answer.' },
+            endless: { icon: '♾️', title: 'Endless Mode', desc: 'Keep going until you get one wrong. How long can you survive?' },
+            survival: { icon: '🎯', title: 'Survival Mode', desc: 'Equations fall from the sky! Answer before they hit the ground.' }
+        };
+        const mi = modeInfo[mode] || modeInfo.classic;
+        document.getElementById('cfg-mode-icon').textContent = mi.icon;
+        document.getElementById('cfg-mode-title').textContent = mi.title;
+        document.getElementById('cfg-mode-desc').textContent = mi.desc;
+
+        // Toggle pill logic
+        function initPills(containerId) {
+            document.querySelectorAll(`#${containerId} .pill, #${containerId} .op-pill, #${containerId} .concept-pill`).forEach(pill => {
+                pill.addEventListener('click', () => {
+                    pill.classList.toggle('on');
+                });
+            });
+        }
+        initPills('digit-pills');
+        initPills('op-pills');
+        initPills('concept-pills');
+
+        function getSelected(containerId) {
+            return [...document.querySelectorAll(`#${containerId} .on`)].map(p => p.dataset.val);
+        }
+
+        // Presets
+        function applyPreset(preset) {
+            // Reset all
+            document.querySelectorAll('.pill,.op-pill,.concept-pill').forEach(p => p.classList.remove('on'));
+
+            switch (preset) {
+                case 'easy':
+                    setOn('digit-pills', ['1', '2']);
+                    setOn('op-pills', ['+', '-']);
+                    setOn('concept-pills', ['s1']);
+                    break;
+                case 'medium':
+                    setOn('digit-pills', ['2', '3']);
+                    setOn('op-pills', ['+', '-', '×', '÷']);
+                    setOn('concept-pills', ['s1', 's4']);
+                    break;
+                case 'hard':
+                    setOn('digit-pills', ['2', '3', '4']);
+                    setOn('op-pills', ['+', '-', '×', '÷']);
+                    setOn('concept-pills', ['s1', 's4', 's5', 's6']);
+                    break;
+                case 'all':
+                    document.querySelectorAll('.pill,.op-pill,.concept-pill').forEach(p => p.classList.add('on'));
+                    break;
+            }
+        }
+        function setOn(container, vals) {
+            document.querySelectorAll(`#${container} [data-val]`).forEach(p => {
+                if (vals.includes(p.dataset.val)) p.classList.add('on');
+            });
+        }
+
+        // ============ BUILD CONFIG + START ============
+        let trainConfig = {};
+
+        function beginGame() {
+            const digits = getSelected('digit-pills').map(Number);
+            const ops = getSelected('op-pills');
+            const concepts = getSelected('concept-pills');
+
+            if (digits.length === 0 || (ops.length === 0 && concepts.includes('s1') && concepts.length === 1)) {
+                alert('Please select at least one option from each category.');
+                return;
+            }
+            if (concepts.length === 0) {
+                alert('Please select at least one concept.');
+                return;
+            }
+
+            trainConfig = { digits, ops, concepts };
+            sessionStorage.setItem('qm_train_config', JSON.stringify(trainConfig));
+
+            showPage('config-page', false);
+            if (mode === 'classic') startClassic();
+            else if (mode === 'endless') startEndless();
+            else if (mode === 'survival') startSurvival();
+        }
+
+        function showPage(id, show) {
+            document.getElementById(id).classList.toggle('active', show);
+        }
+
+        function newQ() {
+            return QGen.configuredQ(trainConfig);
+        }
+
+        // ============ GAME STATE ============
+        let cCorrect = 0, cWrong = 0, cTotal = 0, classicInterval = null, classicSecs = 120;
+        let currentQ = null, survScore = 0, survItems = [], survInterval = null, survSpeed = 8000, survActive = true;
 
         // ============ CLASSIC ============
         function startClassic() {
-            document.getElementById('classic-page').style.display = 'block';
+            showPage('classic-page', true);
             nextClassicQ();
             const circle = document.getElementById('classic-circle');
             classicInterval = setInterval(() => {
                 classicSecs--;
                 const m = Math.floor(classicSecs / 60), s = classicSecs % 60;
                 document.getElementById('classic-timer').textContent = `${m}:${s.toString().padStart(2, '0')}`;
-                const pct = (classicSecs / 120) * 360;
-                circle.style.setProperty('--prog', pct + 'deg');
+                const deg = (classicSecs / 120) * 360;
+                circle.style.setProperty('--prog', deg + 'deg');
                 if (classicSecs <= 0) { clearInterval(classicInterval); showClassicResults(); }
             }, 1000);
 
-            document.getElementById('train-input').addEventListener('keyup', (e) => {
-                if (e.key !== 'Enter') return;
-                const v = parseFloat(e.target.value.trim());
-                if (isNaN(v)) return;
-                const correct = Math.abs(v - currentQ.a) < 0.05;
-                if (correct) { cCorrect++; e.target.className = 'correct'; }
-                else { cWrong++; e.target.className = 'wrong'; }
-                cTotal++;
-                document.getElementById('c-correct').textContent = cCorrect;
-                document.getElementById('c-wrong').textContent = cWrong;
-                document.getElementById('c-qnum').textContent = cTotal;
-                setTimeout(nextClassicQ, 250);
-            });
+            document.getElementById('classic-input').addEventListener('keyup', classicHandler);
+        }
+
+        function classicHandler(e) {
+            if (e.key !== 'Enter') return;
+            const inp = e.target;
+            const v = inp.value.trim();
+            if (!v) return;
+            const isCorrect = checkAnswer(v, currentQ);
+            if (isCorrect) { cCorrect++; inp.className = 'game-input correct'; }
+            else { cWrong++; inp.className = 'game-input wrong'; }
+            cTotal++;
+            document.getElementById('c-correct').textContent = cCorrect;
+            document.getElementById('c-wrong').textContent = cWrong;
+            document.getElementById('c-qnum').textContent = cTotal;
+            setTimeout(nextClassicQ, 250);
         }
 
         function nextClassicQ() {
             currentQ = newQ();
             document.getElementById('c-question').textContent = currentQ.q;
-            const inp = document.getElementById('train-input');
-            inp.value = ''; inp.className = ''; inp.focus();
+            const inp = document.getElementById('classic-input');
+            inp.value = ''; inp.className = 'game-input'; inp.focus();
         }
 
         function showClassicResults() {
+            document.getElementById('classic-input').removeEventListener('keyup', classicHandler);
             const xp = cCorrect;
             if (xp > 0) QM.addXP(xp);
-            document.getElementById('classic-page').style.display = 'none';
+            showPage('classic-page', false);
             showResults('Classic Complete ⏱️', [
                 ['Correct', cCorrect], ['Wrong', cWrong],
                 ['Answered', cTotal], ['+XP', xp]
@@ -506,69 +903,70 @@
 
         // ============ ENDLESS ============
         function startEndless() {
-            document.getElementById('endless-page').style.display = 'block';
+            showPage('endless-page', true);
             nextEndlessQ();
-            document.getElementById('endless-input').addEventListener('keyup', (e) => {
-                if (e.key !== 'Enter') return;
-                const v = parseFloat(e.target.value.trim());
-                if (isNaN(v)) return;
-                const correct = Math.abs(v - currentQ.a) < 0.05;
-                if (correct) {
-                    cCorrect++;
-                    document.getElementById('e-correct').textContent = cCorrect;
-                    document.getElementById('e-streak').textContent = cCorrect;
-                    e.target.className = 'correct';
-                    setTimeout(nextEndlessQ, 250);
-                } else {
-                    e.target.className = 'wrong';
-                    setTimeout(() => {
-                        document.getElementById('endless-page').style.display = 'none';
-                        showResults('Game Over ♾️', [
-                            ['Correct', cCorrect], ['Streak', cCorrect]
-                        ]);
-                    }, 600);
-                }
-            });
+            document.getElementById('endless-input').addEventListener('keyup', endlessHandler);
+        }
+
+        function endlessHandler(e) {
+            if (e.key !== 'Enter') return;
+            const inp = e.target;
+            const v = inp.value.trim();
+            if (!v) return;
+            const correct = checkAnswer(v, currentQ);
+            if (correct) {
+                cCorrect++;
+                document.getElementById('e-correct').textContent = cCorrect;
+                document.getElementById('e-streak').textContent = cCorrect;
+                inp.className = 'game-input correct';
+                setTimeout(nextEndlessQ, 250);
+            } else {
+                inp.className = 'game-input wrong';
+                setTimeout(() => {
+                    showPage('endless-page', false);
+                    showResults('Game Over ♾️', [
+                        ['Correct', cCorrect], ['Streak', cCorrect]
+                    ]);
+                }, 600);
+            }
         }
 
         function nextEndlessQ() {
             currentQ = newQ();
             document.getElementById('e-question').textContent = currentQ.q;
             const inp = document.getElementById('endless-input');
-            inp.value = ''; inp.className = ''; inp.focus();
+            inp.value = ''; inp.className = 'game-input'; inp.focus();
         }
 
         // ============ SURVIVAL ============
-        let survItems = [];
-        let survInterval = null;
-        let survSpeed = 8000; // ms to fall
-        let survActive = true;
-
         function startSurvival() {
-            document.getElementById('survival-page').style.display = 'block';
+            showPage('survival-page', true);
             spawnFalling();
             survInterval = setInterval(() => {
                 if (!survActive) return;
                 spawnFalling();
-                survSpeed = Math.max(3000, survSpeed - 100); // speed up
+                survSpeed = Math.max(3000, survSpeed - 100);
             }, 3000);
 
-            document.getElementById('surv-input').addEventListener('keyup', (e) => {
-                if (e.key !== 'Enter' || !survActive) return;
-                const v = parseFloat(e.target.value.trim());
-                e.target.value = '';
-                if (isNaN(v)) return;
-                // Find first matching question
-                const idx = survItems.findIndex(i => Math.abs(v - i.q.a) < 0.05);
-                if (idx !== -1) {
-                    survItems[idx].el.remove();
-                    survItems.splice(idx, 1);
-                    survScore++;
-                    document.getElementById('surv-score').textContent = survScore;
-                    e.target.className = ''; e.target.style.borderColor = '#10b981';
-                    setTimeout(() => e.target.style.borderColor = '', 400);
-                }
-            });
+            document.getElementById('surv-input').addEventListener('keyup', survHandler);
+            document.getElementById('surv-input').focus();
+        }
+
+        function survHandler(e) {
+            if (e.key !== 'Enter' || !survActive) return;
+            const inp = e.target;
+            const v = parseFloat(inp.value.trim());
+            inp.value = '';
+            if (isNaN(v)) return;
+            const idx = survItems.findIndex(i => Math.abs(v - i.q.a) < 0.05);
+            if (idx !== -1) {
+                survItems[idx].el.remove();
+                survItems.splice(idx, 1);
+                survScore++;
+                document.getElementById('surv-score').textContent = survScore;
+                inp.style.borderColor = '#10b981';
+                setTimeout(() => inp.style.borderColor = '', 400);
+            }
         }
 
         function spawnFalling() {
@@ -585,22 +983,29 @@
 
             el.addEventListener('animationend', () => {
                 if (!survActive) return;
-                // Question hit ground
                 survActive = false;
                 clearInterval(survInterval);
                 el.remove();
                 const xp = Math.floor(survScore / 3);
                 if (xp > 0) QM.addXP(xp);
-                document.getElementById('survival-page').style.display = 'none';
+                showPage('survival-page', false);
                 showResults('Game Over 🎯', [
                     ['Answered', survScore], ['+XP', xp]
                 ]);
             });
         }
 
-        // ============ SHARED RESULTS ============
+        // ============ SHARED ============
+        function checkAnswer(val, q) {
+            if (q.isText) {
+                return val.replace(/\s/g, '').toLowerCase() === String(q.a).replace(/\s/g, '').toLowerCase();
+            }
+            const numVal = parseFloat(val);
+            return !isNaN(numVal) && Math.abs(numVal - q.a) < 0.05;
+        }
+
         function showResults(title, stats) {
-            document.getElementById('results-page').style.display = 'block';
+            showPage('results-page', true);
             document.getElementById('res-title').textContent = title;
             const grid = document.getElementById('res-grid');
             grid.innerHTML = '';
@@ -613,6 +1018,13 @@
         }
 
         function restart() {
+            // Re-use same config, just reload
+            sessionStorage.setItem('qm_train_mode', mode);
+            window.location.reload();
+            // After reload, auto-start with saved config
+        }
+
+        function reconfigure() {
             sessionStorage.setItem('qm_train_mode', mode);
             window.location.reload();
         }
@@ -623,10 +1035,12 @@
             window.location.href = 'dashboard.html';
         }
 
-        // INIT
-        if (mode === 'classic') startClassic();
-        else if (mode === 'endless') startEndless();
-        else if (mode === 'survival') startSurvival();
+        // Auto-start if config was saved from a "Play Again"
+        (function () {
+            const saved = sessionStorage.getItem('qm_train_config');
+            // Don't auto-start — always show config screen first
+            // User presses "Start Training" to begin
+        })();
     </script>
 </body>
 
