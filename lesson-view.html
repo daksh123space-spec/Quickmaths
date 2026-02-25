@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Lesson | QuickMaths</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --accent: #7c3aed;
+            --accent2: #3b82f6;
+            --bg: #020205;
+            --card: rgba(255, 255, 255, .05);
+            --border: rgba(255, 255, 255, .08);
+            --text2: rgba(255, 255, 255, .5)
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: auto
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none
+        }
+
+        .n1,
+        .n2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: .2
+        }
+
+        .n1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #3b0086, transparent);
+            top: -200px;
+            right: -100px
+        }
+
+        .n2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #063b6e, transparent);
+            bottom: -100px;
+            left: -100px
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 700px;
+            animation: fadeUp .6s ease
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--text2);
+            text-decoration: none;
+            font-size: .88rem;
+            margin-bottom: 2rem;
+            transition: color .2s
+        }
+
+        .back-link:hover {
+            color: #fff
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: .5rem
+        }
+
+        .lesson-sub {
+            color: var(--text2);
+            font-size: .95rem;
+            margin-bottom: 3rem
+        }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem
+        }
+
+        .choice-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all .35s;
+            text-decoration: none;
+            color: #fff;
+            display: block
+        }
+
+        .choice-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, .2);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, .5)
+        }
+
+        .choice-card.learn {
+            border-top: 3px solid #a78bfa
+        }
+
+        .choice-card.quiz {
+            border-top: 3px solid #34d399
+        }
+
+        .choice-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.25rem
+        }
+
+        .choice-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: .6rem
+        }
+
+        .choice-card p {
+            font-size: .85rem;
+            color: var(--text2);
+            line-height: 1.5;
+            margin-bottom: 1.5rem
+        }
+
+        .choice-btn {
+            display: inline-block;
+            padding: .65rem 1.5rem;
+            border-radius: 100px;
+            font-size: .85rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, .05);
+            transition: all .25s
+        }
+
+        .choice-card.learn .choice-btn {
+            border-color: #a78bfa;
+            color: #a78bfa
+        }
+
+        .choice-card.quiz .choice-btn {
+            border-color: #34d399;
+            color: #34d399
+        }
+
+        .choice-card:hover .choice-btn {
+            transform: scale(1.05)
+        }
+
+        .mastered-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            background: rgba(16, 185, 129, .1);
+            border: 1px solid rgba(16, 185, 129, .25);
+            color: #10b981;
+            border-radius: 100px;
+            font-size: .78rem;
+            font-weight: 600;
+            padding: .3rem .85rem;
+            margin-bottom: .75rem
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="n1"></div>
+        <div class="n2"></div>
+    </div>
+    <div class="wrap">
+        <a href="dashboard.html" class="back-link">← Back to Learn</a>
+        <div id="mastered-tag-area"></div>
+        <div class="lesson-title" id="lesson-title">Lesson</div>
+        <div class="lesson-sub" id="lesson-sub">Choose how to study this lesson</div>
+        <div class="choice-grid">
+            <a href="#" class="choice-card learn" id="learn-btn">
+                <div class="choice-icon">📖</div>
+                <h3>Learn Concept & Method</h3>
+                <p>Read through the technique with worked examples and step-by-step explanations.</p>
+                <div class="choice-btn">Read Lesson +10 XP</div>
+            </a>
+            <a href="#" class="choice-card quiz" id="quiz-btn">
+                <div class="choice-icon">✏️</div>
+                <h3>Questions</h3>
+                <p>15 questions on this topic. Score 70+ to master this lesson and earn 50 XP.</p>
+                <div class="choice-btn">Start Quiz +50 XP</div>
+            </a>
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script>
+        const user = QM.getUser();
+        if (!user) { window.location.href = 'auth.html'; }
+
+        const lesson = JSON.parse(sessionStorage.getItem('qm_lesson') || '{}');
+        const { secId, lessonId } = lesson;
+        if (!secId || !lessonId) { window.location.href = 'dashboard.html'; }
+
+        const sec = CURRICULUM.find(s => s.id === secId);
+        const les = sec?.lessons.find(l => l.id === lessonId);
+
+        if (!les) { window.location.href = 'dashboard.html'; }
+
+        document.getElementById('lesson-title').textContent = les.title;
+        document.getElementById('lesson-sub').textContent = `Section: ${sec.title}`;
+
+        if (QM.isLessonMastered(secId, lessonId)) {
+            document.getElementById('mastered-tag-area').innerHTML = '<div class="mastered-tag">✓ Mastered</div>';
+        }
+
+        document.getElementById('learn-btn').onclick = (e) => {
+            e.preventDefault();
+            sessionStorage.setItem('qm_lesson', JSON.stringify({ secId, lessonId }));
+            window.location.href = 'lesson-content.html';
+        };
+
+        document.getElementById('quiz-btn').onclick = (e) => {
+            e.preventDefault();
+            sessionStorage.setItem('qm_quiz', JSON.stringify({ secId, lessonId, mode: 'lesson', count: 15 }));
+            window.location.href = 'quiz.html';
+        };
+    </script>
+</body>
+
+</html>

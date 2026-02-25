@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Mastery Check | QuickMaths</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --accent: #7c3aed;
+            --bg: #020205;
+            --border: rgba(255, 255, 255, .08);
+            --text2: rgba(255, 255, 255, .5)
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none
+        }
+
+        .n1 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #4c1d95, transparent);
+            filter: blur(100px);
+            opacity: .25;
+            top: -200px;
+            right: -100px
+        }
+
+        .n2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #0c4a6e, transparent);
+            filter: blur(100px);
+            opacity: .2;
+            bottom: -100px;
+            left: -100px
+        }
+
+        .card {
+            position: relative;
+            z-index: 10;
+            background: rgba(10, 10, 26, .7);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 36px;
+            padding: 3.5rem;
+            max-width: 640px;
+            width: 100%;
+            text-align: center;
+            animation: fadeUp .7s ease
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .trophy {
+            font-size: 4rem;
+            margin-bottom: 1.5rem
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, .1);
+            border: 1px solid rgba(245, 158, 11, .25);
+            color: #f59e0b;
+            font-size: .78rem;
+            font-weight: 700;
+            padding: .3rem .85rem;
+            border-radius: 100px;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: .75rem
+        }
+
+        .sub {
+            color: var(--text2);
+            font-size: .95rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2.5rem
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.25rem
+        }
+
+        .info-box .ico {
+            font-size: 1.6rem;
+            margin-bottom: .6rem
+        }
+
+        .info-box h4 {
+            font-size: .88rem;
+            font-weight: 600;
+            margin-bottom: .3rem
+        }
+
+        .info-box p {
+            font-size: .78rem;
+            color: var(--text2)
+        }
+
+        .btn-start {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            border: none;
+            border-radius: 16px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .3s;
+            margin-bottom: 1rem
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, .35)
+        }
+
+        .btn-back {
+            display: block;
+            color: var(--text2);
+            font-size: .88rem;
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .btn-back:hover {
+            color: #fff
+        }
+
+        .section-name {
+            display: inline-block;
+            background: rgba(124, 58, 237, .12);
+            border: 1px solid rgba(124, 58, 237, .2);
+            color: #a78bfa;
+            border-radius: 100px;
+            padding: .3rem .85rem;
+            font-size: .82rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem
+        }
+
+        .prev-score {
+            font-size: .8rem;
+            color: var(--text2);
+            margin-top: .5rem
+        }
+
+        .prev-score.pass {
+            color: #10b981
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="n1"></div>
+        <div class="n2"></div>
+    </div>
+    <div class="card">
+        <div class="trophy">🏆</div>
+        <div class="badge">MASTERY CHECK</div>
+        <div class="section-name" id="sec-name">Section</div>
+        <h1>Prove your<br><span
+                style="font-family:'Playfair Display',serif;font-style:italic;color:#a78bfa">mastery</span></h1>
+        <p class="sub">30 questions covering the entire section. Score <strong>80 or above</strong> to unlock the next
+            section and earn <strong>500 XP</strong>.</p>
+        <div class="info-grid">
+            <div class="info-box">
+                <div class="ico">❓</div>
+                <h4>30 Questions</h4>
+                <p>Covers all topics in this section</p>
+            </div>
+            <div class="info-box">
+                <div class="ico">🎯</div>
+                <h4>Pass: 80+</h4>
+                <p>Score 80 or above to master</p>
+            </div>
+            <div class="info-box">
+                <div class="ico">⚡</div>
+                <h4>500 XP</h4>
+                <p>Earned on successful completion</p>
+            </div>
+            <div class="info-box">
+                <div class="ico">⏭️</div>
+                <h4>Skip Option</h4>
+                <p>You can skip lessons by passing this</p>
+            </div>
+        </div>
+        <div class="prev-score" id="prev-score"></div>
+        <button class="btn-start" id="start-btn">Start Mastery Check</button>
+        <a href="dashboard.html" class="btn-back">← Back to Learn</a>
+    </div>
+    <script src="data.js"></script>
+    <script>
+        const user = QM.getUser();
+        if (!user) { window.location.href = 'auth.html'; }
+        const secId = sessionStorage.getItem('qm_mastery');
+        if (!secId) { window.location.href = 'dashboard.html'; }
+        const sec = CURRICULUM.find(s => s.id === secId);
+        document.getElementById('sec-name').textContent = sec?.title || secId;
+
+        const prev = user?.masteryChecks?.[secId];
+        if (prev) {
+            const el = document.getElementById('prev-score');
+            el.textContent = prev.passed ? `✓ Previously passed with ${prev.score}` : `Last attempt: ${prev.score} — not passed yet`;
+            el.className = 'prev-score' + (prev.passed ? ' pass' : '');
+        }
+
+        document.getElementById('start-btn').onclick = () => {
+            sessionStorage.setItem('qm_quiz', JSON.stringify({ secId, mode: 'mastery', count: 30 }));
+            window.location.href = 'quiz.html';
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Sign In | QuickMaths</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            min-height: 100vh;
+            background: #020205;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0
+        }
+
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .4
+        }
+
+        .n1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #3b0086, transparent);
+            top: -100px;
+            right: -100px;
+            animation: drift1 8s ease-in-out infinite alternate
+        }
+
+        .n2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #1a0055, transparent);
+            bottom: -100px;
+            left: -100px;
+            animation: drift2 10s ease-in-out infinite alternate
+        }
+
+        @keyframes drift1 {
+            to {
+                transform: translate(-40px, 30px)
+            }
+        }
+
+        @keyframes drift2 {
+            to {
+                transform: translate(40px, -30px)
+            }
+        }
+
+        .stars {
+            position: absolute;
+            inset: 0
+        }
+
+        .auth-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(10, 10, 26, .7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 32px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 460px;
+            text-align: center;
+            animation: fadeUp .8s ease
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 2.5rem
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: .75rem
+        }
+
+        .sub {
+            color: rgba(255, 255, 255, .5);
+            font-size: .95rem;
+            margin-bottom: 2.5rem
+        }
+
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: white;
+            color: #111;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s;
+            margin-bottom: 1.5rem
+        }
+
+        .google-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .4)
+        }
+
+        .google-btn svg {
+            width: 22px;
+            height: 22px
+        }
+
+        .divider {
+            color: rgba(255, 255, 255, .25);
+            font-size: .85rem;
+            margin: .5rem 0 1.5rem
+        }
+
+        /* Username step */
+        .step {
+            display: none
+        }
+
+        .step.active {
+            display: block
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 1.25rem
+        }
+
+        .input-group label {
+            display: block;
+            font-size: .85rem;
+            color: rgba(255, 255, 255, .6);
+            margin-bottom: .5rem;
+            letter-spacing: .5px
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: .9rem 1.2rem;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color .3s
+        }
+
+        .input-group input:focus {
+            border-color: #7c3aed
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #7c3aed, #3b82f6);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .3s;
+            letter-spacing: .5px
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(124, 58, 237, .35)
+        }
+
+        .note {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .3);
+            margin-top: 1.5rem
+        }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: .75rem;
+            margin-bottom: 1.5rem
+        }
+
+        .avatar {
+            font-size: 1.8rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .05);
+            border: 2px solid rgba(255, 255, 255, .08);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .25s
+        }
+
+        .avatar:hover,
+        .avatar.selected {
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, .15);
+            transform: scale(1.1)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="nebula n1"></div>
+        <div class="nebula n2"></div>
+    </div>
+
+    <div class="auth-card">
+        <div class="logo">QuickMaths</div>
+
+        <!-- Step 1: Sign In -->
+        <div class="step active" id="step-signin">
+            <h1>Welcome Back,<br><span
+                    style="font-family:'Playfair Display',serif;font-style:italic;color:#a78bfa">Speed Thinker</span>
+            </h1>
+            <p class="sub">Sign in to continue your mental math journey</p>
+            <button class="google-btn" id="google-signin-btn">
+                <svg viewBox="0 0 48 48">
+                    <path fill="#FFC107"
+                        d="M43.6 20H24v8h11.3C33.8 33.6 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4.5 24 4.5 13.2 4.5 4.5 13.2 4.5 24S13.2 43.5 24 43.5 43.5 34.8 43.5 24c0-1.3-.1-2.7-.3-4z" />
+                    <path fill="#FF3D00"
+                        d="M6.3 14.7l6.6 4.8C14.5 16 19 13 24 13c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4.5 24 4.5c-7.7 0-14.3 4.4-17.7 10.2z" />
+                    <path fill="#4CAF50"
+                        d="M24 43.5c5.2 0 9.9-1.9 13.5-5.1l-6.2-5.2C29.4 35 26.8 36 24 36c-5.3 0-9.8-3.4-11.4-8.1l-6.6 5.1C9.6 39.1 16.4 43.5 24 43.5z" />
+                    <path fill="#1976D2"
+                        d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.6l6.2 5.2C41 35.6 43.5 30.3 43.5 24c0-1.3-.1-2.7-.3-4z" />
+                </svg>
+                Continue with Google
+            </button>
+            <p class="note">We only use your Google account for authentication. No spam, ever.</p>
+        </div>
+
+        <!-- Step 2: Create Username -->
+        <div class="step" id="step-username">
+            <h1 style="font-size:1.8rem;margin-bottom:.5rem">Create your<br><span
+                    style="font-family:'Playfair Display',serif;font-style:italic;color:#a78bfa">identity</span></h1>
+            <p class="sub">Pick a username to personalize your experience</p>
+            <div class="avatar-grid" id="avatar-grid">
+                🦁🐯🦊🐺🦅🦋🌊⚡🔥💫🌈🚀✨🎯🏆
+                <script>document.write('')</script>
+            </div>
+            <div class="input-group">
+                <label>USERNAME</label>
+                <input type="text" id="username-input" placeholder="e.g. SpeedThinker99" maxlength="20">
+            </div>
+            <button class="btn-primary" id="create-account-btn">Let's Go →</button>
+            <p class="note">You can always change this later in your settings.</p>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        // Render avatars
+        const emojis = ['🦁', '🐯', '🦊', '🐺', '🦅', '🦋', '🌊', '⚡', '🔥', '💫'];
+        const grid = document.getElementById('avatar-grid');
+        grid.innerHTML = '';
+        let selectedAvatar = emojis[0];
+        emojis.forEach(e => {
+            const d = document.createElement('div');
+            d.className = 'avatar' + (e === selectedAvatar ? ' selected' : '');
+            d.textContent = e;
+            d.onclick = () => { document.querySelectorAll('.avatar').forEach(a => a.classList.remove('selected')); d.classList.add('selected'); selectedAvatar = e; };
+            grid.appendChild(d);
+        });
+
+        // Check if already logged in
+        const user = QM.getUser();
+        if (user && user.username) { window.location.href = 'index.html'; }
+
+        document.getElementById('google-signin-btn').onclick = () => {
+            // Simulate Google sign-in (no backend)
+            const email = 'student@gmail.com';
+            sessionStorage.setItem('qm_pending_email', email);
+            document.getElementById('step-signin').classList.remove('active');
+            document.getElementById('step-username').classList.add('active');
+        };
+
+        document.getElementById('create-account-btn').onclick = () => {
+            const username = document.getElementById('username-input').value.trim();
+            if (!username || username.length < 2) {
+                document.getElementById('username-input').style.borderColor = '#ef4444';
+                return;
+            }
+            const email = sessionStorage.getItem('qm_pending_email') || 'student@gmail.com';
+            QM.initUser(selectedAvatar + ' ' + username, email, 'beginner');
+            window.location.href = 'index.html';
+        };
+    </script>
+</body>
+
+</html>

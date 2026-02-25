@@ -167,7 +167,19 @@
     </main>
 
 
+    <script src="data.js"></script>
     <script src="script.js"></script>
+    <script>
+        // If user has already done diagnostics, show dashboard link instead
+        const _u = QM.getUser();
+        if (_u && _u.diagnosticScore !== null) {
+            const ctaBtn = document.querySelector('.cta-container a');
+            if (ctaBtn) {
+                ctaBtn.textContent = 'Continue Learning →';
+                ctaBtn.href = 'dashboard.html';
+            }
+        }
+    </script>
 </body>
 
 </html>

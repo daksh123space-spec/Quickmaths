@@ -174,11 +174,31 @@
         <div class="full-page-card">
             <!-- Intro State -->
             <div id="quiz-intro">
-                <div class="badge" style="margin-bottom: 2rem;">Challenge Mode</div>
+                <div class="badge" style="margin-bottom: 2rem;">Placement Test</div>
                 <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Diagnostic Test</h1>
-                <p class="subtitle" style="margin: 0 auto 3rem;">15 progressive questions covering fractions, decimals,
-                    and logic. Your speed and accuracy will determine your rank.</p>
-                <button class="btn-primary large" id="begin-quiz">Start Diagnostic Test</button>
+                <p class="subtitle" style="margin: 0 auto 2rem;">15 progressive questions covering addition,
+                    subtraction, multiplication, fractions, percentages, and powers. Your speed and accuracy will
+                    determine your rank and learning path.</p>
+                <div
+                    style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:500px;margin:0 auto 2.5rem;text-align:center">
+                    <div
+                        style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem">
+                        <div style="font-size:1.5rem">❓</div>
+                        <div style="font-size:.8rem;margin-top:.4rem;color:rgba(255,255,255,.5)">15 Questions</div>
+                    </div>
+                    <div
+                        style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem">
+                        <div style="font-size:1.5rem">⏱️</div>
+                        <div style="font-size:.8rem;margin-top:.4rem;color:rgba(255,255,255,.5)">Timed</div>
+                    </div>
+                    <div
+                        style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem">
+                        <div style="font-size:1.5rem">🎯</div>
+                        <div style="font-size:.8rem;margin-top:.4rem;color:rgba(255,255,255,.5)">Personalised Path</div>
+                    </div>
+                </div>
+                <button class="btn-primary large" id="begin-quiz" onclick="startDiagnostic()">Start Diagnostic
+                    Test</button>
                 <div style="margin-top: 2rem;">
                     <a href="index.html"
                         style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">← Back to
@@ -236,7 +256,13 @@
         </div>
     </div>
 
-    <script src="diagnostic.js"></script>
+    <script src="data.js"></script>
+    <script>
+        function startDiagnostic() {
+            sessionStorage.setItem('qm_quiz', JSON.stringify({ mode: 'diagnostic', count: 15 }));
+            window.location.href = 'quiz.html';
+        }
+    </script>
 </body>
 
 </html>
