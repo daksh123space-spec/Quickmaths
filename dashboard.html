@@ -302,161 +302,320 @@
             letter-spacing: .5px
         }
 
-        /* Learn path */
+        /* Learn path — Duolingo zigzag */
         .learn-path {
-            max-width: 640px;
-            margin: 0 auto
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .section-block {
-            margin-bottom: 3.5rem
+            margin-bottom: 1rem;
         }
 
-        .section-header {
+        /* Section banner — Duolingo style */
+        .section-banner {
+            background: linear-gradient(135deg, rgba(124, 58, 237, .25), rgba(59, 130, 246, .15));
+            border: 1px solid rgba(124, 58, 237, .3);
+            border-radius: 20px;
+            padding: 1.1rem 1.75rem;
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: .75rem 1.25rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 18px
+            margin-bottom: .5rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .section-header .s-icon {
-            font-size: 1.6rem
+        .section-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, .06), transparent);
+            pointer-events: none;
         }
 
-        .section-header h3 {
-            font-size: 1rem;
-            font-weight: 700
+        .section-banner .sb-icon {
+            font-size: 1.5rem;
+            z-index: 1;
         }
 
-        .section-header .s-prog {
-            font-size: .8rem;
+        .section-banner .sb-text {
+            flex: 1;
+            z-index: 1;
+        }
+
+        .section-banner .sb-text h3 {
+            font-size: .95rem;
+            font-weight: 700;
+        }
+
+        .section-banner .sb-text .sb-sub {
+            font-size: .78rem;
             color: var(--text2);
-            margin-top: .2rem
+            margin-top: .15rem;
         }
 
         .mastery-btn {
-            margin-left: auto;
-            padding: .5rem 1.1rem;
-            background: rgba(124, 58, 237, .15);
-            border: 1px solid rgba(124, 58, 237, .3);
+            z-index: 1;
+            padding: .45rem 1rem;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .15);
             border-radius: 100px;
-            color: #a78bfa;
-            font-size: .78rem;
-            font-weight: 600;
+            color: #c4b5fd;
+            font-size: .75rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all .25s;
-            white-space: nowrap
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: .8px;
         }
 
         .mastery-btn:hover {
-            background: rgba(124, 58, 237, .3)
+            background: rgba(124, 58, 237, .2);
+            border-color: rgba(124, 58, 237, .4);
         }
 
         .mastery-btn.passed {
-            color: #10b981;
-            border-color: #10b981;
-            background: rgba(16, 185, 129, .1)
+            color: #34d399;
+            border-color: rgba(52, 211, 153, .3);
+            background: rgba(52, 211, 153, .08);
         }
 
-        .lessons-path {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            padding-left: 2rem;
-            position: relative
-        }
-
-        .lessons-path::before {
-            content: '';
-            position: absolute;
-            left: .9rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border)
-        }
-
-        .lesson-step {
+        .skip-banner {
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: .85rem 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1.25rem;
-            padding: .75rem 0;
+            gap: .85rem;
+            margin-bottom: 1rem;
+            opacity: .45;
+        }
+
+        .skip-banner .sb-icon {
+            font-size: 1.2rem;
+        }
+
+        .skip-banner h3 {
+            font-size: .88rem;
+            font-weight: 600;
+        }
+
+        .skip-badge {
+            margin-left: auto;
+            font-size: .7rem;
+            color: #6b7280;
+            background: rgba(107, 114, 128, .08);
+            border-radius: 6px;
+            padding: .2rem .6rem;
+            font-weight: 600;
+        }
+
+        /* Zigzag path container */
+        .zig-path {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0 2rem;
             position: relative;
-            cursor: pointer
         }
 
-        .lesson-step.locked {
-            opacity: .4;
-            cursor: not-allowed
+        /* Dotted connector line between circles */
+        .zig-connector {
+            width: 3px;
+            height: 32px;
+            background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, .12) 0px, rgba(255, 255, 255, .12) 5px, transparent 5px, transparent 10px);
+            flex-shrink: 0;
         }
 
-        .step-circle {
-            width: 44px;
-            height: 44px;
+        .zig-connector.done-line {
+            background: repeating-linear-gradient(to bottom, rgba(124, 58, 237, .45) 0px, rgba(124, 58, 237, .45) 5px, transparent 5px, transparent 10px);
+        }
+
+        /* Each lesson node */
+        .zig-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform .2s;
+        }
+
+        .zig-node:hover:not(.locked) {
+            transform: scale(1.08);
+        }
+
+        .zig-node.locked {
+            cursor: not-allowed;
+            opacity: .35;
+        }
+
+        /* The big circle */
+        .zig-circle {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            border: 2px solid var(--border);
-            background: rgba(10, 10, 26, .8);
-            flex-shrink: 0;
+            font-size: 1.8rem;
             transition: all .3s;
-            z-index: 1
+            position: relative;
+            border: 4px solid;
         }
 
-        .step-circle.done {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            border-color: transparent;
-            box-shadow: 0 0 20px rgba(124, 58, 237, .4)
+        /* States */
+        .zig-circle.locked {
+            background: rgba(255, 255, 255, .04);
+            border-color: rgba(255, 255, 255, .1);
+            color: rgba(255, 255, 255, .2);
         }
 
-        .step-circle.current {
-            border-color: var(--accent);
-            box-shadow: 0 0 16px rgba(124, 58, 237, .3);
-            animation: pulse-ring 2s infinite
+        .zig-circle.done {
+            background: linear-gradient(145deg, #7c3aed, #6d28d9);
+            border-color: #a78bfa;
+            color: #fff;
+            box-shadow: 0 6px 30px rgba(124, 58, 237, .35), inset 0 -3px 0 rgba(0, 0, 0, .15);
         }
 
-        @keyframes pulse-ring {
+        .zig-circle.current {
+            background: linear-gradient(145deg, #7c3aed, #6d28d9);
+            border-color: #c4b5fd;
+            color: #fff;
+            box-shadow: 0 6px 30px rgba(124, 58, 237, .5), inset 0 -3px 0 rgba(0, 0, 0, .15);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Outer ring glow on current */
+        .zig-circle.current::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 3px solid rgba(124, 58, 237, .3);
+            animation: ring-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
 
             0%,
             100% {
-                box-shadow: 0 0 16px rgba(124, 58, 237, .3)
+                box-shadow: 0 6px 30px rgba(124, 58, 237, .4), inset 0 -3px 0 rgba(0, 0, 0, .15);
             }
 
             50% {
-                box-shadow: 0 0 28px rgba(124, 58, 237, .5)
+                box-shadow: 0 6px 40px rgba(124, 58, 237, .65), inset 0 -3px 0 rgba(0, 0, 0, .15);
             }
         }
 
-        .step-info h4 {
-            font-size: .92rem;
-            font-weight: 600
+        @keyframes ring-pulse {
+
+            0%,
+            100% {
+                opacity: .5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.06);
+            }
         }
 
-        .step-info span {
-            font-size: .75rem;
-            color: var(--text2)
+        /* Crown / check icon inside done circle */
+        .zig-check {
+            font-size: 1.6rem;
         }
 
-        .xp-tag {
-            margin-left: auto;
+        /* START label above current */
+        .start-pill {
+            position: absolute;
+            top: -36px;
+            background: #7c3aed;
+            color: #fff;
             font-size: .72rem;
-            color: #f59e0b;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: .3rem 1rem;
+            border-radius: 100px;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, .4);
+            animation: bounce-pill 2s ease-in-out infinite;
+        }
+
+        .start-pill::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #7c3aed;
+        }
+
+        @keyframes bounce-pill {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* Lesson title under circle */
+        .zig-label {
+            margin-top: .5rem;
+            font-size: .72rem;
             font-weight: 600;
-            white-space: nowrap
+            color: var(--text2);
+            text-align: center;
+            max-width: 100px;
+            line-height: 1.3;
         }
 
-        .skip-tag {
-            font-size: .72rem;
-            color: #6b7280;
-            background: rgba(107, 114, 128, .1);
-            border-radius: 6px;
-            padding: .15rem .5rem
+        .zig-node:not(.locked) .zig-label {
+            color: rgba(255, 255, 255, .6);
+        }
+
+        .zig-node.done-node .zig-label {
+            color: #a78bfa;
+        }
+
+        /* Zigzag offset pattern */
+        .zig-node:nth-child(4n+1) {
+            align-self: center;
+        }
+
+        .zig-node:nth-child(4n+2) {
+            align-self: flex-end;
+            margin-right: 15%;
+        }
+
+        .zig-node:nth-child(4n+3) {
+            align-self: center;
+        }
+
+        .zig-node:nth-child(4n+4) {
+            align-self: flex-start;
+            margin-left: 15%;
+        }
+
+        .zig-connector:nth-child(4n+2) {
+            align-self: center;
+        }
+
+        .zig-connector:nth-child(4n+4) {
+            align-self: center;
         }
 
         /* Train modes */
@@ -765,7 +924,7 @@
             updateUI();
         }
 
-        // ---- LEARN PATH ----
+        // ---- LEARN PATH (Duolingo zigzag) ----
         function buildLearnPath() {
             const container = document.getElementById('learn-path');
             container.innerHTML = '';
@@ -776,7 +935,7 @@
                 if (sec.skipFor && sec.skipFor.includes(user.level)) {
                     const block = document.createElement('div');
                     block.className = 'section-block';
-                    block.innerHTML = `<div class="section-header"><span class="s-icon">${sec.icon}</span><div><h3>${sec.title}</h3><div class="s-prog">${sec.skipFor.includes(user.level) ? 'Skipped based on your diagnostic result' : 'In progress'}</div></div><span class="skip-tag">Skipped</span></div>`;
+                    block.innerHTML = `<div class="skip-banner"><span class="sb-icon">${sec.icon}</span><h3>${sec.title}</h3><span class="skip-badge">SKIPPED</span></div>`;
                     container.appendChild(block);
                     return;
                 }
@@ -789,19 +948,25 @@
                 const total = sec.lessons.length;
                 const masteryCls = mastered ? 'passed' : '';
 
-                block.innerHTML = `
-      <div class="section-header">
-        <span class="s-icon">${sec.icon}</span>
-        <div><h3>${sec.title}</h3><div class="s-prog">${done}/${total} lessons mastered</div></div>
-        <button class="mastery-btn ${masteryCls}" onclick="startMastery('${sec.id}')">
-          ${mastered ? '✓ Mastered' : '🏆 Mastery Check'}
-        </button>
-      </div>
-      <div class="lessons-path" id="path-${sec.id}"></div>
-    `;
-                container.appendChild(block);
+                // Section banner
+                const banner = document.createElement('div');
+                banner.className = 'section-banner';
+                banner.innerHTML = `
+                    <span class="sb-icon">${sec.icon}</span>
+                    <div class="sb-text">
+                        <h3>${sec.title}</h3>
+                        <div class="sb-sub">${done}/${total} lessons mastered</div>
+                    </div>
+                    <button class="mastery-btn ${masteryCls}" onclick="startMastery('${sec.id}')">
+                        ${mastered ? '✓ MASTERED' : 'MASTERY CHECK'}
+                    </button>
+                `;
+                block.appendChild(banner);
 
-                const pathEl = block.querySelector(`#path-${sec.id}`);
+                // Zigzag path
+                const zigPath = document.createElement('div');
+                zigPath.className = 'zig-path';
+
                 const unlocked = QM.getUnlockedUpTo(sec.id);
 
                 sec.lessons.forEach((lesson, li) => {
@@ -809,26 +974,44 @@
                     const isCurrent = li === unlocked && !isDone;
                     const isLocked = li > unlocked && !isDone;
 
-                    const step = document.createElement('div');
-                    step.className = 'lesson-step' + (isLocked ? ' locked' : '');
+                    // Connector (skip before first)
+                    if (li > 0) {
+                        const conn = document.createElement('div');
+                        conn.className = 'zig-connector' + (isDone || isCurrent ? ' done-line' : '');
+                        zigPath.appendChild(conn);
+                    }
 
-                    let circleClass = isDone ? 'done' : (isCurrent ? 'current' : '');
-                    let icon = isDone ? '✓' : lesson.icon;
+                    // Node
+                    const node = document.createElement('div');
+                    let nodeClass = 'zig-node';
+                    if (isLocked) nodeClass += ' locked';
+                    if (isDone) nodeClass += ' done-node';
+                    node.className = nodeClass;
 
-                    step.innerHTML = `
-        <div class="step-circle ${circleClass}">${icon}</div>
-        <div class="step-info">
-          <h4>${lesson.title}</h4>
-          <span>${isDone ? 'Mastered ✓' : '30 XP available'}</span>
-        </div>
-        <div class="xp-tag">+30 XP</div>
-      `;
+                    let circleClass = 'zig-circle';
+                    if (isDone) circleClass += ' done';
+                    else if (isCurrent) circleClass += ' current';
+                    else if (isLocked) circleClass += ' locked';
+
+                    let icon = isDone ? '<span class="zig-check">✓</span>' : lesson.icon;
+                    let startLabel = isCurrent ? '<div class="start-pill">START</div>' : '';
+
+                    node.innerHTML = `
+                        <div class="${circleClass}">
+                            ${startLabel}
+                            ${icon}
+                        </div>
+                        <div class="zig-label">${lesson.title}</div>
+                    `;
 
                     if (!isLocked) {
-                        step.onclick = () => openLesson(sec.id, lesson.id);
+                        node.onclick = () => openLesson(sec.id, lesson.id);
                     }
-                    pathEl.appendChild(step);
+                    zigPath.appendChild(node);
                 });
+
+                block.appendChild(zigPath);
+                container.appendChild(block);
             });
         }
 
